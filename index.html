@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Banner with Bootstrap</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    .banner {
+      position: relative;
+      text-align: center;
+      color: #fff;
+    }
+
+    .banner img {
+      width: 100%;
+      height: auto;
+    }
+
+    .banner .banner-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+
+    /* Custom styles */
+    .center-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+    .center-content p {
+      text-align: center;
+    }
+
+    #myCarousel .carousel-item .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-attachment: fixed;
+    }
+
+    #myCarousel h4 {
+      font-size: 50px;
+      margin-bottom: 15px;
+      color: #FFF;
+      line-height: 100%;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    #myCarousel p {
+      font-size: 18px;
+      margin-bottom: 15px;
+
+    }
+
+    /* #myCarousel .carousel-item a {
+     
+      font-size: 14px;
+      color: #FFF;
+      padding: 13px 32px;
+      display: inline-block;
+    }
+
+    #myCarousel .carousel-item a:hover {
+      background: #394fa2;
+      text-decoration: none;
+    } */
+
+    #myCarousel .carousel-item h4 {
+      -webkit-animation-name: fadeInLeft;
+      animation-name: fadeInLeft;
+    }
+
+    #myCarousel .carousel-item p {
+      -webkit-animation-name: slideInRight;
+      animation-name: slideInRight;
+    }
+
+    #myCarousel .carousel-item a {
+      -webkit-animation-name: fadeInUp;
+      animation-name: fadeInUp;
+    }
+
+    #myCarousel .carousel-item .mask img {
+      -webkit-animation-name: slideInRight;
+      animation-name: slideInRight;
+      display: block;
+      height: auto;
+      max-width: 100%;
+    }
+
+    #myCarousel h4,
+    #myCarousel p,
+    #myCarousel a,
+    #myCarousel .carousel-item .mask img {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1.2s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    #myCarousel .container {
+      max-width: 1430px;
+    }
+
+    #myCarousel .carousel-item {
+      height: 100%;
+      min-height: 550px;
+    }
+
+    #myCarousel {
+      position: relative;
+      z-index: 1;
+      background: url(https://i.imgur.com/6axE29k.jpg) center center no-repeat;
+      background-size: cover;
+    }
+
+    .carousel-control-next,
+    .carousel-control-prev {
+      height: 40px;
+      width: 40px;
+      padding: 12px;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      background-color: #004f9e;
+    }
+
+
+    .carousel-item {
+      position: relative;
+      display: none;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      width: 100%;
+      transition: -webkit-transform .6s ease;
+      transition: transform .6s ease;
+      transition: transform .6s ease, -webkit-transform .6s ease;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
+    }
+
+    .carousel-fade .carousel-item {
+      opacity: 0;
+      -webkit-transition-duration: .6s;
+      transition-duration: .6s;
+      -webkit-transition-property: opacity;
+      transition-property: opacity
+    }
+
+    .carousel-fade .carousel-item-next.carousel-item-left,
+    .carousel-fade .carousel-item-prev.carousel-item-right,
+    .carousel-fade .carousel-item.active {
+      opacity: 1
+    }
+
+    .carousel-fade .carousel-item-left.active,
+    .carousel-fade .carousel-item-right.active {
+      opacity: 0
+    }
+
+    .carousel-fade .carousel-item-left.active,
+    .carousel-fade .carousel-item-next,
+    .carousel-fade .carousel-item-prev,
+    .carousel-fade .carousel-item-prev.active,
+    .carousel-fade .carousel-item.active {
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0)
+    }
+
+    @supports (transform-style:preserve-3d) {
+
+      .carousel-fade .carousel-item-left.active,
+      .carousel-fade .carousel-item-next,
+      .carousel-fade .carousel-item-prev,
+      .carousel-fade .carousel-item-prev.active,
+      .carousel-fade .carousel-item.active {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+      }
+    }
+
+    .carousel-fade .carousel-item-left.active,
+    .carousel-fade .carousel-item-next,
+    .carousel-fade .carousel-item-prev,
+    .carousel-fade .carousel-item-prev.active,
+    .carousel-fade .carousel-item.active {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
+
+
+    @-webkit-keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .fadeInLeft {
+      -webkit-animation-name: fadeInLeft;
+      animation-name: fadeInLeft;
+    }
+
+    @-webkit-keyframes fadeInUp {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @-webkit-keyframes fadeInUp {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .fadeInUp {
+      -webkit-animation-name: fadeInUp;
+      animation-name: fadeInUp;
+    }
+
+
+    @keyframes slideInRight {
+      from {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .slideInRight {
+      -webkit-animation-name: slideInRight;
+      animation-name: slideInRight;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 p-0">
+        <div class="banner">
+          <img src="Header 2.png" alt="Banner Image">
+          <div class="banner-content">
+           
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="center-content">
+          <h1  style="color: #004f9e;">DELHI</h1>
+          <p>
+            Delhi, India's captivating capital, beckons tourists with a rich tapestry of history and modernity. Explore
+            iconic landmarks like the Red Fort and Qutub Minar, savor diverse cuisines, and embrace the city's vibrant
+            energy. From bustling markets to the tranquil India Gate, Delhi's dynamic blend makes it a must-visit
+            destination for every traveler.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- slider start here  -->
+  <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      <!-- Carousel items start -->
+      <div class="carousel-item active">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <h2 style="color: #004f9e;">Welcome to Delhi: Your Gateway</h2>
+                <p>As India's capital, Delhi serves as the gateway to the country. Its well-connected airport, railway
+                  network, and excellent road infrastructure make it the perfect starting point for exploring the
+                  diverse regions and attractions of India.</p>
+                <p>We invite you to delve deeper into Delhi, to explore its hidden gems, to experience its warmth and
+                  hospitality, and to create lasting memories in this incredible city. Whether you're a traveller, a
+                  history enthusiast, a foodie, or an adventurer, Delhi has something extraordinary to offer you.</p>
+                <p>Join us in discovering Delhi, where the past and future unite in a symphony of colours, flavours, and
+                  experiences.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="airport.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <h2  style="color: #004f9e;">The Heart of India</h2>
+                <p>Delhi, the sprawling capital of India, is a city that defies easy description. It's a vibrant
+                  metropolis where the past and present coexist in harmony, creating a tapestry of history, culture, and
+                  modernity that is truly unique. Allow us to introduce you to this captivating metropolis.</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="india gate.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <h2  style="color: #004f9e;">
+                  A Glimpse of Delhi's Rich History
+                </h2>
+                <p>Delhi's roots run deep into the annals of history. From the ancient Indraprastha of the Mahabharata
+                  era to the mighty Mughal Empire, and later, as the capital of British India, Delhi has witnessed it
+                  all. Explore the architectural wonders of bygone eras, like the Red Fort, Qutub Minar, and Humayun's
+                  Tomb, that stand as testaments to its rich heritage.</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="qutab minar.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <h2 style="color:#004f9e;">
+                  Cultural Diversity
+                </h2  >
+                <p>
+                  Delhi is a melting pot of cultures, languages, and traditions. You'll experience a harmonious blend of
+                  diverse communities, each contributing its unique flavour to the city's cultural tapestry. From the
+                  bustling streets of Chandni Chowk to the serene spirituality of Akshardham Temple, Delhi has something
+                  for everyone.
+                  .</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="culture.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <h2  style="color: #004f9e;">
+                  Modern Marvels
+                </h2>
+                <p>
+                  While Delhi cherishes its history, it also propels itself into the future. The city boasts world-class
+                  infrastructure, vibrant markets, and a thriving tech and business scene. Witness the futuristic Delhi
+                  Metro, shop at swanky malls, and savour international cuisines at top-notch restaurants
+                  .</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="metro.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <h2  style="color: #004f9e;">
+                  Exploring Delhi: Food and Authenticity
+                </h2>
+                <p>Delhi is a food lover's paradise. Sample the delectable flavours of North Indian cuisine, savour spicy street food like chaat and kebabs, or indulge in fine dining experiences at some of the country's best restaurants. Delhi is also a city of contrasts.
+                  From the serene gardens of Lodi to the chaotic charm of Chandni Chowk, there's something for everyone. Explore its museums, galleries, and theatres. Take a rickshaw ride through the narrow lanes of Old Delhi or wander through the lush greenery of its parks. Delhi is a city that continually surprises and delights
+                  </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="chandini chowk.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="my-content">
+                <h2 style="text-align: center; color: #004f9e;">
+                 Travel 
+                </h2>
+              <h5  style="color: #004f9e;">How to Reach</h5>
+              <p><i style="color:#004f9e;" class="fas fa-plane"></i> <span><b  style="color: #004f9e;">Indira Gandhi International Airport</b> offers brilliant connectivity, both domestic and international with 3 terminals being the host of international tourists. </span></p>
+              <p>
+                <i style="color:#004f9e;" class="fas fa-train"></i> <span><b  style="color: #004f9e;">New Delhi Railway Station </b>is well connected to all several cities of the country.</span>
+              </p>
+              <p>
+                <i style="color:#004f9e;" class="fas fa-road"></i> <span>Delhi is well connected to all National and State highways to every part of the world</span>
+              </p>
+              <p>
+               <b  style="color: #004f9e;">Weather </b> <i  style="color:#004f9e;" class="fas fa-cloud"></i>
+                <p>In September, New Delhi experiences the transition from the monsoon season to early autumn. The weather is generally warm with temperatures ranging from around 25 to 35 degrees Celsius (77 to 95 degrees Fahrenheit).</p>
+              </p>
+              <p><b  style="color: #004f9e;">Clothing</b><br>Pack modest clothing, especially if planning to visit religious sites. Consider the weather conditions during your stay.</p>
+              <p><b  style="color: #004f9e;">Safety Guidelines</b><br>Be aware of safety guidelines & Covid Guidelines issued by the government.</p>
+             
+             <p><b  style="color: #004f9e;">Transportation</b><br>For local transportation you may use local taxis, KIOSK bases cabs and/or App based cabs.</p>
+             <p>
+              <b  style="color: #004f9e;">Visa Requirements</b><br>
+              Check and obtain the necessary visa for your stay in India. For more details please
+              <a href="https://www.mpsnewdelhi.org/visa-information">click here</a>.
+            </p>
+            </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      
+      <!-- Carousel items end -->
+
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span
+          class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a
+        class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span
+          class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+    </div>
+    <!--slide end-->
+    <!-- Add corresponding images for each slider -->
+    <!-- <img src="image_url_here" alt="Image 1" class="img-fluid"> -->
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- Bootstrap JS (Optional - for certain components) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    $('#myCarousel').carousel({
+      interval: 3000,
+    })
+    // let currentIndex = 0;
+    // const sliderItems = document.querySelectorAll('.slider-item');
+    // const images = [
+    //   'airport.jpg', // Replace this with your local image path for slide 1
+    //   'path/to/local/image2.jpg', // Replace this with your local image path for slide 2
+    //   'path/to/local/image3.jpg', // Replace this with your local image path for slide 3
+    //   'path/to/local/image4.jpg', // Replace this with your local image path for slide 4
+    //   'path/to/local/image5.jpg'  // Replace this with your local image path for slide 5
+    // ];
+
+    // function changeSlide() {
+    //   currentIndex = (currentIndex + 1) % sliderItems.length;
+    //   for (let i = 0; i < sliderItems.length; i++) {
+    //     sliderItems[i].classList.remove('active');
+    //   }
+    //   sliderItems[currentIndex].classList.add('active');
+
+    //   const imageContainer = document.querySelector('.image-container img');
+    //   imageContainer.src = images[currentIndex];
+    // }
+
+    // setInterval(changeSlide, 10000); // Change slide every 2 seconds
+  </script>
+</body>
+
+</html>
